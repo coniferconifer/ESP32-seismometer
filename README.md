@@ -31,6 +31,8 @@ IfF (Shindo: Instrumental seismic intensity scale by JMA ) is by definition,
 where "af" is acceleration in gal,
 after filtering in the frequency domain for the entire time span using specified filter by JMA [2].
 
+![Fig.1 ](Fig1.png)
+
 Max "af" acceleration corresponds 0.3sec duration is used to calculate max IfF for the entire shake. [2]
 
 For example , IfF[]={3.2 , 1.2 , 2.5 , 2.2 , 3.1} is observed every 100msec
@@ -61,10 +63,14 @@ IfF_h is also calculated from horizontal acceleration.
 - IfF:  seismic intensity from 3D acceleration
 - IfF_h: seismic intensity from horizontal acceleration
 
+![Fig.2](Fig2.jpg)
+
 Acceleration is measured by MPU6050/MPU9250 placed horizontally.
 Since earthquake or volcanic erruption may affect barometric pressure , BMP388 is attached.
 Both devices are connected via I2C bus. If BMP388 is not attached , this program only
 sends IfF and IfF_h.
+
+![Fig.3 view by Thingsboard](Thingsboard.png)
 
 ## Simulation 
 Simulation earthquake data BCJ-L1 and BCJ-L2 are available as an Exel format data from [8].
