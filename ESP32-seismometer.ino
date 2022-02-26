@@ -576,8 +576,8 @@ void setup() {
   Wire.begin(GPIO_NUM_21, GPIO_NUM_22);
   Wire.setClock(400000L);
   //http://www.azusa-st.com/kjm/FreeRtos/API/semaphores/vSemaphoreTake.html
+  //I2C bus is shared by two devices , semaI2C takes exclusive I2C bus control
   semaI2C = xSemaphoreCreateMutex();
-  //  semaI2C = xSemaphoreCreateBinary();
   xSemaphoreGive( semaI2C );  /* give one semaphore */
   if (initBMP388()!=0){
     Serial.println("Could not find a valid BMP3 sensor, check wiring!");
@@ -592,9 +592,7 @@ void setup() {
     while(1);
   }
   clearLastBuffer();//LastBuffer is used to find acceleration exceeds 0.3sec
-
-  //I2C bus is shared by two devices , semaI2C takes exclusive I2C bus control
-  //  Serial.println("If, IfF, Iftemp, Ifmax");
+  // publishGo is used to signal MQTT publish task to go
   xQueue = xQueueCreate(1, sizeof(publishGo));
   if (xQueue == NULL)
   {
