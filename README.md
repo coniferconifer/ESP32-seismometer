@@ -74,7 +74,7 @@ sends IfF and IfF_h.
 
 ## Simulation 
 Simulation earthquake data BCJ-L1 and BCJ-L2 are available as an Exel format data from [8].
-BCJ data is one dimensional data , simulation data are copied to X,Y and Z axis (half of X axis).
+BCJ data is 10msec interval, one dimensional data , so the simulation data is given to X,Y and Z axis (half of X axis) at every 10msec.
 I have converted it to float bcjL1_wave[] and bcjL2_wave[] and run the simulation by #define SIMULATION
 
 BCJ-L1,BCJ-L2 data are not included in this repository.
@@ -126,4 +126,4 @@ Arduino board manager 1.0.6 / Arduino IDE 1.8.19
 * Copyright 2022 by coniferconifer
 * Apache License
 
-ESP32‚ÆMPU6050(MPU9250‚É‚à“à‘ j‚É‚æ‚éŠÈˆÕk“xŒv‚Å‚·BƒtƒBƒ‹ƒ^[“Á«‚ª‹CÛ’¡‚Ì’è‹`‚ÆˆÙ‚È‚éŠÈˆÕ”Å‚Ì‚½‚ß¸“x‚É‚Â‚¢‚Ä‚Í•s–¾‚Å‚·BBCL-J1,BCL-J2‚Ìƒf[ƒ^‚Í‚æ‚­ÄŒ»‚µ‚Ä‚¢‚Ü‚·‚ªA‹ô‘R‚Ìˆê’v‚Å‚µ‚å‚¤B
+ESP32ï¿½ï¿½MPU6050(MPU9250ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½É‚ï¿½ï¿½ÈˆÕkï¿½xï¿½vï¿½Å‚ï¿½ï¿½Bï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Û’ï¿½ï¿½Ì’ï¿½`ï¿½ÆˆÙ‚È‚ï¿½ÈˆÕ”Å‚Ì‚ï¿½ï¿½ßï¿½ï¿½xï¿½É‚Â‚ï¿½ï¿½Ä‚Í•sï¿½ï¿½ï¿½Å‚ï¿½ï¿½BBCL-J1,BCL-J2ï¿½Ìƒfï¿½[ï¿½^ï¿½Í‚æ‚­ï¿½ÄŒï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Rï¿½Ìˆï¿½vï¿½Å‚ï¿½ï¿½å‚¤ï¿½B
