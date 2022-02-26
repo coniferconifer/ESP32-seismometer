@@ -63,7 +63,7 @@ IfF_h is also calculated from horizontal acceleration.
 - IfF:  seismic intensity from 3D acceleration
 - IfF_h: seismic intensity from horizontal acceleration
 
-![Fig.2](Fig2.jpg)
+![Fig.2](Fig2.png)
 
 Acceleration is measured by MPU6050/MPU9250 placed horizontally.
 Since earthquake or volcanic erruption may affect barometric pressure , BMP388 is attached.
@@ -80,8 +80,8 @@ BCJ-L1,BCJ-L2 data are not included in this repository.
 
 | data | BCJ-L1 | BCJ-L2 | comment |
 |------|------------|---------|-----------------|
-|Shindo| IfF=5.5    | IfF=6.0 | (Ref.[6] page.8)|
-| this program | IfF=5.44 | IfF=5.93 | for 0.2Hz software high pass filter|
+|Shindo| IfF=5.5    | IfF=6.0 | See Ref.[6] page.8|
+| max IfF by this program | IfF=5.44 | IfF=5.93 | for 0.2Hz software high pass filter at sampling rate 10Hz|
 
 The result is not bad by chance, real earth quake is not yet observed.
 
