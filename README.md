@@ -126,3 +126,4 @@ Arduino board manager 1.0.6 / Arduino IDE 1.8.19
 * Copyright 2022 by coniferconifer
 * Apache License
 
+ESP32とMPU6050(MPU9250にも内蔵）による簡易震度計です。フィルター特性が気象庁の定義と異なる簡易版のため精度については不明です。BCL-J1,BCL-J2のデータはよく再現していますが、偶然の一致でしょう。
