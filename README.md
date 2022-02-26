@@ -15,7 +15,7 @@ Shindo (JMA's instrumental seismic intensity scale ) is only used in Japan and i
 
 - Shindo 2.5-3.4 is around 6-20 gal.  Frequently observed in Japan. 
 - Shindo 3.5-4.4 is around 20-60 gal.
-- Shindo 4.5-4.9 is around 60-110 gal. Get ready to protect our life.
+- Shindo 4.5-4.9 is around 60-110 gal. Get ready to protect yourself.
 - Shindo 5.0-5.4 is around 110-200 gal. I have experienced this on the 14th floor in March 11th,2011.  Extremely scary earthquake!
 
 Shindo(Instrumental seismic intensity) and acceleration is quoted from [3].
