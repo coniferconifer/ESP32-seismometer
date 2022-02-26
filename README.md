@@ -129,5 +129,6 @@ Arduino board manager 1.0.6 / Arduino IDE 1.8.19
 ## Appendix
 
 ![Fig.4  ](TongaEruption.png)
-Barometric pressure surge by Tonga erruption in 20:39 Jan 15,2022. by AIRBENTO's BMP180
+Barometric pressure surge by Tonga eruption in 20:39 Jan 15,2022 JST. by AIRBENTO's BMP180.
+The shock wave traveled 8000km from Tonga.
 
