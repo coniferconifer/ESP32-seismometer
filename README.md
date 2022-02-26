@@ -76,6 +76,7 @@ sends IfF and IfF_h.
 Simulation earthquake data BCJ-L1 and BCJ-L2 are available as an Exel format data from [8].
 BCJ data is one dimensional data , simulation data are copied to X,Y and Z axis (half of X axis).
 I have converted it to float bcjL1_wave[] and bcjL2_wave[] and run the simulation by #define SIMULATION
+
 BCJ-L1,BCJ-L2 data are not included in this repository.
 
 | data | BCJ-L1 | BCJ-L2 | comment |
