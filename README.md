@@ -107,13 +107,13 @@ Arduino board manager 1.0.6 / Arduino IDE 1.8.19
   - [8] https://www.bcj.or.jp/download/wave/
   
 ### Filters library
-  - [https://github.com/JonHub/Filters]https://github.com/JonHub/Filters
+  - https://github.com/JonHub/Filters
 ### BMP388 library
-  - [https://github.com/adafruit/Adafruit_BMP3XX]https://github.com/adafruit/Adafruit_BMP3XX
+  - https://github.com/adafruit/Adafruit_BMP3XX
 ### PubSubClient
-  - [https://github.com/knolleary/pubsubclient](https://github.com/knolleary/pubsubclient)
+  - https://github.com/knolleary/pubsubclient
 ### MQTT server with visiualization tools
-  - [https://thingsboard.io/] (https://thingsboard.io/)
+  - https://thingsboard.io/
 
 ## License
 * Copyright 2022 by coniferconifer
