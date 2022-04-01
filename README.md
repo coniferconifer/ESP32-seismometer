@@ -84,15 +84,17 @@ BCJ-L1,BCJ-L2 data are not included in this repository.
 |Shindo| IfF=5.5    | IfF=6.0 | See Ref.[6] page.8|
 | max IfF by this program | IfF=5.44 | IfF=5.93 | for 0.2Hz software high pass filter at sampling rate 10Hz|
 
-The result is not bad by chance.
+The simulation result is not bad by chance.
 
-The real earth quake was observed as IFf=2.6.
+The real earth quake was observed as IFf=2.65 in 23:34 2022-3-31 JST.
 According to JMA, its epicenter was Kamekoka city , Kyoto pref. The magnitude was 4.3.
 https://www.data.jma.go.jp/multi/quake/quake_detail.html?eventID=20220331233814&lang=en
 
-Reported Shindo near my home was 2 , corresponding to 1.5 =< IFf < 2.5.
+Reported Shindo by JMA's observatory near my home  was 2 which is trancated from Shindo (Instrumental seismic intensity scale )  , corresponding to 1.5 =< IfF < 2.5. 
 
-First Observation of the earthquake 
+The observed result is not so bad.
+
+First observation of the real earthquake 
 ![Fig.4 earthquake observed in March 31 2022 ](20220331.png)
 
 
