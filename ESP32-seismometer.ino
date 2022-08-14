@@ -136,7 +136,9 @@ boolean BMP388exists=false;
 #endif
 
 #define BTSERIAL
-
+#ifdef BTSERIAL
+const char *BTpin = "0000";
+#endif
 #ifdef SIMULATION
 #undef BTSERIAL //avoid BTSERIAL use in case of simulation 
 #endif
@@ -568,13 +570,14 @@ void setup() {
   Serial.println("ESP32-seismometer.ino");
 #ifdef BTSERIAL
   Serial.println("Setup Android terminal to pair with Seisemo-BT-server");
+  SerialBT.setPin(BTpin);
   SerialBT.begin("Seismo-BT-server");
   Serial.println("The device started, now you can pair it with bluetooth!");
 #endif
   pinMode(GPIO_NUM_2, OUTPUT); //LED
 
   Wire.begin(GPIO_NUM_21, GPIO_NUM_22);
-  Wire.setClock(400000L);
+//  Wire.setClock(400000L);
   //http://www.azusa-st.com/kjm/FreeRtos/API/semaphores/vSemaphoreTake.html
   //I2C bus is shared by two devices , semaI2C takes exclusive I2C bus control
   semaI2C = xSemaphoreCreateMutex();
@@ -638,9 +641,11 @@ int initMPU6050() {
   Wire.endTransmission(false);
   Wire.requestFrom(MPU_addr, 1, true);
   c = Wire.read();
-  Serial.print("MPU6050 WHO_AM_I (0x71): ");
+  Serial.print("MPU9250 / MPU6050 WHO_AM_I (0x68 / 0x71): ");7
   Serial.println(c, HEX);
-  if (c!=0x71) return -1;
+  if (!(c==0x71 || c==0x68)) {
+    return -1;
+  }
   Wire.beginTransmission(MPU_addr);
   Wire.write(MPU6050_CONFIG);
   Wire.write(MPU6050_EXT_SYNC_DISABLED);
