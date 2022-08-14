@@ -137,7 +137,7 @@ boolean BMP388exists=false;
 
 #define BTSERIAL
 #ifdef BTSERIAL
-const char *BTpin = "0000";
+const char *BTpin = "0123";
 #endif
 #ifdef SIMULATION
 #undef BTSERIAL //avoid BTSERIAL use in case of simulation 
@@ -564,6 +564,8 @@ int initBMP388() {
   return 0;
 }
 extern int initMPU6050();
+extern void clearLastBuffer();
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
@@ -575,7 +577,6 @@ void setup() {
   Serial.println("The device started, now you can pair it with bluetooth!");
 #endif
   pinMode(GPIO_NUM_2, OUTPUT); //LED
-
   Wire.begin(GPIO_NUM_21, GPIO_NUM_22);
 //  Wire.setClock(400000L);
   //http://www.azusa-st.com/kjm/FreeRtos/API/semaphores/vSemaphoreTake.html
@@ -591,7 +592,7 @@ void setup() {
   setupWiFi();
   delay(3000); //wait mechanical stability of MPU6050 after you turn on  ESP32 board
   if (initMPU6050()==-1) {
-    Serial.printf("MPU6050 not detected\r\n");
+    Serial.printf("MPU6050/MPU9250 not detected\r\n");
     while(1);
   }
   clearLastBuffer();//LastBuffer is used to find acceleration exceeds 0.3sec
@@ -632,28 +633,27 @@ void codeForPress(void * parameter) {
     delay(100);
   }
 }
-
+void writeMPU6050(byte reg, byte data) {
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(reg);
+  Wire.write(data);
+  Wire.endTransmission();
+}
 int initMPU6050() {
   unsigned char c;
   int error;
   Wire.beginTransmission(MPU_addr);
   Wire.write(MPU6050_WHO_AM_I);
-  Wire.endTransmission(false);
-  Wire.requestFrom(MPU_addr, 1, true);
+  Wire.endTransmission();
+  Wire.requestFrom(MPU_addr, 1);
   c = Wire.read();
-  Serial.print("MPU9250 / MPU6050 WHO_AM_I (0x71 / 0x68): ");
+  Serial.print("MPU9250 / MPU6050 WHO_AM_I ( 0x71/ 0x68): ");
   Serial.println(c, HEX);
   if (!(c==0x71 || c==0x68)) {
     return -1;
   }
-  Wire.beginTransmission(MPU_addr);
-  Wire.write(MPU6050_CONFIG);
-  Wire.write(MPU6050_EXT_SYNC_DISABLED);
-  Wire.write(MPU6050_ACCEL_CONFIG);
-  Wire.write(MPU6050_AFS_SEL_2G);
-  Wire.write(MPU6050_PWR_MGMT_1);  // PWR_MGMT_1 register
-  Wire.write(0);                   // set to zero (wakes up the MPU-6050)
-  Wire.endTransmission(true);
+  writeMPU6050(MPU6050_ACCEL_CONFIG, MPU6050_AFS_SEL_2G); // accel range: ±2g
+  writeMPU6050(MPU6050_PWR_MGMT_1, 0x00);   // disable sleep mode
 #ifdef SIMULATION
 #else
   getOffsetMPU6050();
@@ -662,20 +662,23 @@ int initMPU6050() {
 }
 
 void getAxAyAz( int16_t *AcX, int16_t *AcY , int16_t *AcZ) {
-  if (xSemaphoreTake( semaI2C, pdMS_TO_TICKS( WAIT_FOR_SEMAPHORE_TIME )  ) == pdTRUE ) {
+    int16_t  Tmp,GyX,GyY,GyZ;
+    if (xSemaphoreTake( semaI2C, pdMS_TO_TICKS( WAIT_FOR_SEMAPHORE_TIME )  ) == pdTRUE ) {
     Wire.beginTransmission(MPU_addr);
     Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
     Wire.endTransmission(false);
-    Wire.requestFrom(MPU_addr, 14, true); // request a total of 14 registers
+    Wire.requestFrom(MPU_addr, 14); // request a total of 14 registers
     *AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
     *AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
     *AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-    int16_t  Tmp,GyX,GyY,GyZ;
+
     Tmp=Wire.read()<<8|Wire.read(); // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
     GyX=Wire.read()<<8|Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)  
     GyY=Wire.read()<<8|Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
     GyZ=Wire.read()<<8|Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
     xSemaphoreGive( semaI2C );  /* give one semaphore */
+  } else {
+    Serial.println("failed to get semaphore");
   }
 }
 int16_t offsetX, offsetY, offsetZ; //MPU9050 offset , placed horizontaly
@@ -688,7 +691,7 @@ void getOffsetMPU6050() {
 #define CALIBCNT 1000
   for (i = 0; i < CALIBCNT; i++) {
     getAxAyAz( &AcX, &AcY , &AcZ);
-    // Serial.printf("inner %d , %d , %d \r\n",AcX,AcY,AcZ-16384);
+   // Serial.printf("inner %d , %d , %d \r\n",AcX,AcY,AcZ-16384);
     tempAcX = tempAcX + AcX;
     tempAcY = tempAcY + AcY;
     tempAcZ = tempAcZ + AcZ;
