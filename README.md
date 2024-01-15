@@ -89,6 +89,7 @@ The simulation result is not bad by chance.
 The real earth quake was observed as IFf=2.65 in 23:34 2022-3-31 JST.
 According to JMA, its epicenter was Kameoka city , Kyoto pref. The magnitude was 4.3.
 https://www.data.jma.go.jp/multi/quake/quake_detail.html?eventID=20220331233814&lang=en
+https://earthquake.tenki.jp/bousai/earthquake/detail/2022/03/31/2022-03-31-23-34-14.html
 
 Reported Shindo by JMA's observatory near my home  was 2 which is trancated from Shindo (Instrumental seismic intensity scale )  , corresponding to 1.5 =< IfF < 2.5. 
 
